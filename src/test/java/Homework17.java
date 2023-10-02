@@ -31,7 +31,7 @@ public class Homework17 extends BaseTest {
                 "Henry's List 1");
         clickXpathButton("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[2]/form/button");
 
-        Assert.assertEquals(driver.findElement(By.cssSelector("div.success.show")).getText(),
+        Assert.assertEquals(getCssText("div.success.show"),
                 "Created playlist \"Henry's List 1.\"");
     }
 
@@ -53,5 +53,10 @@ public class Homework17 extends BaseTest {
     public static void clickXpathButton(String selector) {
         WebElement field = driver.findElement(By.xpath(selector));
         field.click();
+    }
+
+    public static String getCssText(String selector) {
+        WebElement field = driver.findElement(By.cssSelector(selector));
+        return field.getText();
     }
 }
