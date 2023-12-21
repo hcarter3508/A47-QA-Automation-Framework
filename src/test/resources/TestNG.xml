@@ -8,7 +8,9 @@
             <class name="LoginTests"/>
             <class name="BaseTest"/>
             <class name="Homework18">
-                <method name="playSong"/>
+                <methods>
+                    <include name="playSong"/>
+                </methods>
             </class>
         </classes>
     </test>

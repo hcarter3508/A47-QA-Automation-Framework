@@ -17,42 +17,19 @@ public class Homework18 extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
 
         // log into Koel
-        setCssTextBox("input[type='email']", "henry.carter@testpro.io");
-        setCssTextBox("input[type='password']", "password");
+        login("henry.carter@testpro.io", "password");
 
-        clickCssButton("button[type='submit']");
+        // activate the song list
+        clickCssButtonDelay("a[href='#!/songs']", 1000);
 
-        // click play next song
-        // causes the player control buttons to become visible, but there is
-        // no response from the player otherwise. I even attempting the
-        // following line twice.... Please advise. The video for the following
-        // lecture is terrible.
-        clickXpathButton("//*[@id='mainFooter']/div[1]/i[2]");
+        // select a song
+        // #songsWrapper > div > div > div.item-container > table > tr:nth-child(1)
+        // //*[@id="songsWrapper"]/div/div/div[1]/table/tr[1]
+        clickXpathButtonDelay("//*[@id=\"songsWrapper\"]/div/div/div[1]/table/tr[1]", 1000);
 
-    }
+        // activate the play/resume button
+        clickXpathButtonAction("//span[@title='Play or resume']");
 
-    public static void setCssTextBox(String selector, String value) {
-        WebElement field = driver.findElement(By.cssSelector(selector));
-        field.clear();
-        field.sendKeys(value);
-    }
-    public static void setXpathTextBox(String selector, String value) {
-        WebElement field = driver.findElement(By.xpath(selector));
-        field.clear();
-        field.sendKeys(value);
-    }
-
-    public static void clickCssButton(String selector) {
-        WebElement field = driver.findElement(By.cssSelector(selector));
-        field.click();
-    }
-    public static void clickXpathButton(String selector) {
-        WebElement field = driver.findElement(By.xpath(selector));
-        field.click();
-    }
-
-    public static String getCssText(String selector) {
-        WebElement field = driver.findElement(By.cssSelector(selector));
-        return field.getText();
+        Assert.assertTrue(getCssIsDisplayed("[data-testid = 'sound-bar-play']"));
     }
 }
